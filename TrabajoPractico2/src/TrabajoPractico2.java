@@ -1,0 +1,2 @@
+public class TrabajoPractico2 {
+}
