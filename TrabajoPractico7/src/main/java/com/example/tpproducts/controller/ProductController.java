@@ -4,6 +4,7 @@ import com.example.tpproducts.dto.ProductRequestDto;
 import com.example.tpproducts.dto.ProductResponseDto;
 import com.example.tpproducts.dto.ProductStockUpdateDto;
 import com.example.tpproducts.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponseDto> create(@RequestBody ProductRequestDto requestDto) {
+    public ResponseEntity<ProductResponseDto> create(@Valid @RequestBody ProductRequestDto requestDto) {
         ProductResponseDto created = productService.createProduct(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
