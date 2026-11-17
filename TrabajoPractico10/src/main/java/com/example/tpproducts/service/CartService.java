@@ -1,6 +1,7 @@
 package com.example.tpproducts.service;
 
 import com.example.tpproducts.dto.AddCartItemRequestDto;
+import com.example.tpproducts.dto.CartItemResponseDto;
 import com.example.tpproducts.dto.CartResponseDto;
 import com.example.tpproducts.model.Cart;
 import com.example.tpproducts.model.CartItem;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -46,10 +50,17 @@ public class CartService {
         return mapToResponseDto(savedCart);
     }
 
-    // Método de mapeo a DTO (adaptar a los campos de tu CartResponseDto)
     private CartResponseDto mapToResponseDto(Cart cart) {
-        // Mapea la entidad Cart y su lista cart.getItems() hacia CartResponseDto
-        // Retornando los datos del carrito con los ítems y productos asociados
-        return new CartResponseDto(cart);
+        List<CartItemResponseDto> itemsDto = cart.getItems().stream()
+                .map(item -> new CartItemResponseDto(
+                        item.getId(),
+                        item.getProduct().getId(),
+                        item.getProduct().getName(),
+                        item.getProduct().getPrice(),
+                        item.getQuantity()
+                ))
+                .collect(Collectors.toList());
+
+        return new CartResponseDto(cart.getId(), itemsDto);
     }
 }

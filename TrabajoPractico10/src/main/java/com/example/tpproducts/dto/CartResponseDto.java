@@ -1,19 +1,18 @@
 package com.example.tpproducts.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartResponseDto {
 
     private Long id;
-    private List<CartItemResponseDto> items = new ArrayList<>();
+    private List<CartItemResponseDto> items;
 
     public CartResponseDto() {
     }
 
     public CartResponseDto(Long id, List<CartItemResponseDto> items) {
         this.id = id;
-        this.items = items != null ? items : new ArrayList<>();
+        this.items = items;
     }
 
     public Long getId() {

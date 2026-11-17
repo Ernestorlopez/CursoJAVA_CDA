@@ -7,17 +7,25 @@ public class CartItemResponseDto {
     private Long id;
     private Long productId;
     private String productName;
-    private BigDecimal productPrice;
+    private Double price;
     private Integer quantity;
 
     public CartItemResponseDto() {
     }
 
-    public CartItemResponseDto(Long id, Long productId, String productName, BigDecimal productPrice, Integer quantity) {
+    public CartItemResponseDto(Long id, Long productId, String productName, Double price, Integer quantity) {
         this.id = id;
         this.productId = productId;
         this.productName = productName;
-        this.productPrice = productPrice;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public CartItemResponseDto(Long id, Long productId, String productName, BigDecimal price, Integer quantity) {
+        this.id = id;
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price != null ? price.doubleValue() : null;
         this.quantity = quantity;
     }
 
@@ -45,12 +53,12 @@ public class CartItemResponseDto {
         this.productName = productName;
     }
 
-    public BigDecimal getProductPrice() {
-        return productPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setProductPrice(BigDecimal productPrice) {
-        this.productPrice = productPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Integer getQuantity() {
