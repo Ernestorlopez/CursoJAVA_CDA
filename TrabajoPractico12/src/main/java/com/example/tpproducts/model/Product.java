@@ -11,15 +11,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 120)
     private String name;
 
-    private String description;
-
-    @Column(nullable = false)
+    @Column(nullable = false, length = 80)
     private String category;
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
     @Column(nullable = false)
@@ -28,19 +26,26 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, String name, String description, BigDecimal price, Integer stock) {
+    public Product(Long id, String name, String category, BigDecimal price, Integer stock) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.category = category;
         this.price = price;
         this.stock = stock;
     }
 
-    public Product(Long id, String name, String description, String category, BigDecimal price, Integer stock) {
+    public Product(String name, String category, BigDecimal price, Integer stock) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    // Constructor adicional por compatibilidad previa
+    public Product(Long id, String name, BigDecimal price, Integer stock) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.category = category;
+        this.category = "General";
         this.price = price;
         this.stock = stock;
     }
@@ -59,14 +64,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getCategory() {

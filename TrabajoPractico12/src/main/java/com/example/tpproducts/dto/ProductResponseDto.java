@@ -13,17 +13,19 @@ public class ProductResponseDto {
     public ProductResponseDto() {
     }
 
-    public ProductResponseDto(Long id, String name, BigDecimal price, Integer stock) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.stock = stock;
-    }
-
     public ProductResponseDto(Long id, String name, String category, BigDecimal price, Integer stock) {
         this.id = id;
         this.name = name;
         this.category = category;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    // Constructor sobrecargado por compatibilidad
+    public ProductResponseDto(Long id, String name, BigDecimal price, Integer stock) {
+        this.id = id;
+        this.name = name;
+        this.category = "General";
         this.price = price;
         this.stock = stock;
     }
